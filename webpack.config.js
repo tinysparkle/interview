@@ -9,9 +9,14 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
-  devtool: 'inline-source-map',
   devServer: {
-    static: './dist',
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    client: {
+      logging: 'error',
+    },
+    compress: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -30,4 +35,5 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
+  stats: 'errors-only',
 };
