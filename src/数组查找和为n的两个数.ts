@@ -1,39 +1,9 @@
 /**
  * @description 递增数组找出和为n的两个数
- * 时间复杂度o(n^2)
+ * 双指针实现
 */
 
 function findTwoNums1 (array: number[], target: number) {
-  const arr: number[] = []
-  const length = array.length;
-  if (length === 0) return arr
-
-  for (let i = 0;  i < length - 1; i++) {
-    let flag = false;
-    const num1 = array[i]
-
-    for (let j = i + 1; j < length; j++) {
-      const num2 = array[j];
-      if (target === num1 + num2) {
-        flag = true
-        arr.push(num1)
-        arr.push(num2)
-        break
-      }
-    }
-
-    if (flag) break;
-  }
-
-  return arr
-}
-
-
-/**
- * @description 双指针实现
-*/
-
-function findTwoNums2 (array: number[], target: number) {
   const list: number[] = [];
   const length = array.length;
   if (length === 0) return list;
@@ -60,8 +30,31 @@ function findTwoNums2 (array: number[], target: number) {
   return list
 }
 
+/**
+ * @description 乱序数组找出和为n的两个数
+ * map实现
+*/
+function findTwoNums2 (array: number[], target: number) {
+  const list: number[] = []
+  const length = array.length;
+  if (length === 0) return list;
+  const map = new Map();
+  for (let i = 0; i < array.length; i++) {
+    const val = target - array[i];
+    if (map.has(val)) {
+      list.push(array[map.get(val)])
+      list.push(array[i])
+      return list
+    }
 
-const arr = [10, 30, 40, 50, 80]
+    map.set(array[i], i)
+  }
+  return list
+}
 
-const res = findTwoNums2(arr, 40)
+
+const arr = [10, 5, 40, 15, 80]
+
+const res = findTwoNums2(arr, 45)
+console.log('res: ', res);
 export default {}
