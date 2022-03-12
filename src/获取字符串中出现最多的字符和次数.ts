@@ -8,37 +8,6 @@ interface IRes {
 /**
  * @description 双指针
 */
-function findStr3 (str: string): IRes {
-  const res: IRes = {
-    char: '',
-    count: 0
-  }
-  const length = str.length;
-  if (length === 0) return res;
-  
-  let i;
-  let j = 0
-  let count = 0
-  for (i = 0; i < length; i++) {
-    if (str[i] === str[j]) {
-      count++;
-    }
-    if (str[i] !== str[j] || i === length - 1) {
-      if (count > res.count ) {
-        res.char = str[j]
-        res.count = count
-      }
-      count = 0
-      if (i < length - 1) {
-        j = i;
-        i--
-      }
-    }
-  }
-
-  return res
-}
-
 function findStr2 (str: string): IRes {
   const res: IRes = {
     char: '',
@@ -108,7 +77,7 @@ function findStr1 (str: string): IRes {
   return res
 }
 
-const res = findStr1('aaabbccccd');
+const res = findStr2('aaabbccd');
 console.log('res: ', res);
 
 export default {}
