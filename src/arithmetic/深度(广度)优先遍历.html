@@ -35,15 +35,32 @@
       }
     }
 
-    // 深度优先遍历 贪心
+    // 深度优先遍历 递归 贪心
+    // function deepTraervse(node) {
+    //   if (node instanceof Node) {
+    //     visitNode(node)
+    //     const childNodes = node.childNodes
+    //     if (childNodes.length) {
+    //       childNodes.forEach(child => {
+    //         deepTraervse(child)
+    //       })
+    //     }
+    //   }
+    // }
+    
+
+    // 深度优先遍历 栈方式实现
     function deepTraervse(node) {
       if (node instanceof Node) {
-        visitNode(node)
-        const childNodes = node.childNodes
-        if (childNodes.length) {
-          childNodes.forEach(child => {
-            deepTraervse(child)
-          })
+        const stack = []
+        stack.push(node)
+        while(stack.length) {
+          const curNode = stack.pop();
+          visitNode(curNode)
+          const childNodes = curNode.childNodes
+          if (childNodes.length) {
+            Array.from(childNodes).reverse().forEach(c => stack.push(c))
+          }
         }
       }
     }
